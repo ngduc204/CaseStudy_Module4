@@ -23,6 +23,12 @@
                 <th>Mô tả</th>
                 <td th:text="${movie.description}"></td>
             </tr>
+            <tr>
+                <th>Movie</th>
+                <td>
+                    <video th:src="${movie.movie}" controls></video>
+                </td>
+            </tr>
         </table>
         <a th:href="@{/admin/movies}" class="btn btn-secondary">Quay lại</a>
         <a th:href="@{'/admin/movies/edit/' + ${movie.id}}" class="btn btn-warning">Sửa</a>
