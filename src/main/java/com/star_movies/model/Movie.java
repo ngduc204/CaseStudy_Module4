@@ -23,4 +23,8 @@ public class Movie {
 
     private String description;
 
+    private String movie;
+
+    private String thumbnail;
+
 }
