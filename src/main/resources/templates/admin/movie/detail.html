@@ -24,9 +24,15 @@
                 <td th:text="${movie.description}"></td>
             </tr>
             <tr>
+                <th>Hình ảnh</th>
+                <td>
+                    <img th:src="${movie.thumbnail}" style="width: 400px; max-width: 100%; max-height: 250px; height: auto; display: block; border-radius: 16px;">
+                </td>
+            </tr>
+            <tr>
                 <th>Movie</th>
                 <td>
-                    <video th:src="${movie.movie}" controls></video>
+                    <video th:src="${movie.movie}" controls style="width: 400px; max-width: 100%; max-height: 250px; height: auto; display: block; border-radius: 16px; overflow: hidden;"></video>
                 </td>
             </tr>
         </table>

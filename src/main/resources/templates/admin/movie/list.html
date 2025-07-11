@@ -16,6 +16,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Tên phim</th>
+                    <th>Hình ảnh</th>
                     <th>Mô tả</th>
                     <th>Hành động</th>
                 </tr>
@@ -24,17 +25,18 @@
                 <tr th:each="movie : ${movies}">
                     <td th:text="${movie.id}"></td>
                     <td th:text="${movie.title}"></td>
+                    <td>
+                        <img th:src="${movie.thumbnail}" alt="Thumbnail" style="max-width: 100px; max-height: 100px;">
+                    </td>
                     <td th:text="${movie.description}"></td>
                     <td>
                         <a th:href="@{'/admin/movies/detail/' + ${movie.id}}" class="btn btn-info btn-sm">Chi tiết</a>
                         <a th:href="@{'/admin/movies/edit/' + ${movie.id}}" class="btn btn-warning btn-sm">Sửa</a>
-                        <a th:href="@{'/admin/movies/delete/' + ${movie.id}}" class="btn btn-danger btn-sm"
-                            onclick="return confirm('Xác nhận xóa?')">Xóa</a>
+                        <a th:href="@{'/admin/movies/delete/' + ${movie.id}}" class="btn btn-danger btn-sm" onclick="return confirm('Xác nhận xóa?')">Xóa</a>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </body>
-
 </html>

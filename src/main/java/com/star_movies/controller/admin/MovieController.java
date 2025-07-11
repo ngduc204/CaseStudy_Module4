@@ -54,10 +54,12 @@ public class MovieController {
     }
 
     @PostMapping("/save")
-    public String saveMovie(@ModelAttribute("movie") Movie movie, @RequestParam("movieFile") MultipartFile movieFile) {
+    public String saveMovie(@ModelAttribute("movie") Movie movie, @RequestParam("movieFile") MultipartFile movieFile, @RequestParam("thumbnailFile") MultipartFile thunbnailFile) {
         try {
             String moviePath = handleUploadService.handleUpload(movieFile, "movies");
             movie.setMovie(moviePath);
+            String thunbnailPath = handleUploadService.handleUpload(thunbnailFile, "thunbnails");
+            movie.setThumbnail(thunbnailPath);
         } catch (IOException e) {
             e.printStackTrace();
         }
