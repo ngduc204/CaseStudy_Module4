@@ -1,562 +1,66 @@
 <!DOCTYPE html>
-<html lang="vi">
-<head>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Star Movies - Trang chủ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #1a1a2e;
-            --secondary-color: #16213e;
-            --accent-color: #0f3460;
-            --text-color: #ffffff;
-            --card-bg: #1e1e2e;
-            --hover-color: #e94560;
-        }
-
-        body {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: var(--text-color);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-        }
-
-        .navbar {
-            background: rgba(26, 26, 46, 0.95) !important;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .navbar-brand {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--hover-color) !important;
-        }
-
-        .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .btn-primary {
-            background: var(--hover-color);
-            border: none;
-            padding: 12px 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background: #d13a4f;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
-        }
-
-        .section-title {
-            text-align: center;
-            margin: 3rem 0 2rem 0;
-            font-size: 2.5rem;
-            font-weight: bold;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--hover-color);
-            border-radius: 2px;
-        }
-
-        .movie-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            height: 100%;
-        }
-
-        .movie-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: var(--hover-color);
-        }
-
-        .movie-thumbnail {
-            height: 300px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .movie-thumbnail::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .movie-card:hover .movie-thumbnail::before {
-            opacity: 1;
-        }
-
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--hover-color);
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .movie-card:hover .play-button {
-            opacity: 1;
-        }
-
-        .movie-info {
-            padding: 1.5rem;
-        }
-
-        .movie-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-        }
-
-        .movie-description {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-
-        .movie-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .rating {
-            color: #ffd700;
-        }
-
-        .footer {
-            background: var(--primary-color);
-            padding: 3rem 0 1rem 0;
-            margin-top: 4rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-content {
-            text-align: center;
-        }
-
-        .social-links {
-            margin: 1rem 0;
-        }
-
-        .social-links a {
-            color: var(--text-color);
-            margin: 0 10px;
-            font-size: 1.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--hover-color);
-        }
-
-        .search-section {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem 0;
-            margin: 2rem 0;
-        }
-
-        .search-box {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .form-control {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-color);
-            border-radius: 25px;
-            padding: 12px 20px;
-        }
-
-        .form-control:focus {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: var(--hover-color);
-            color: var(--text-color);
-            box-shadow: 0 0 0 0.2rem rgba(233, 69, 96, 0.25);
-        }
-
-        .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .movie-thumbnail {
-                height: 250px;
-            }
-        }
-    </style>
 </head>
+
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-star me-2"></i>Star Movies
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#home">Trang chủ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#movies">Phim</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">Giới thiệu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Liên hệ</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div th:replace="fragments/navbar :: navbar"></div>
 
     <!-- Hero Section -->
     <section class="hero-section" id="home">
         <div class="hero-content">
             <h1>Khám phá thế giới điện ảnh</h1>
             <p>Hàng nghìn bộ phim hay nhất, mới nhất đang chờ bạn khám phá</p>
-            <button class="btn btn-primary btn-lg">
-                <i class="fas fa-play me-2"></i>Xem ngay
-            </button>
-        </div>
-    </section>
-
-    <!-- Search Section -->
-    <section class="search-section">
-        <div class="container">
-            <div class="search-box">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Tìm kiếm phim yêu thích...">
-                    <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- Movies Section -->
     <section class="container" id="movies">
-        <h2 class="section-title">Phim nổi bật</h2>
-        
+        <h2 class="section-title">Danh sách phim</h2>
+
         <div class="row g-4">
-            <!-- Movie Card 1 -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="movie-card">
-                    <div class="movie-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
-                        <button class="play-button">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                    <div class="movie-info">
-                        <h5 class="movie-title">Avengers: Endgame</h5>
-                        <p class="movie-description">Cuộc phiêu lưu hoành tráng của các siêu anh hùng Marvel trong trận chiến cuối cùng.</p>
-                        <div class="movie-meta">
-                            <span class="rating">
-                                <i class="fas fa-star"></i> 9.2
-                            </span>
-                            <span>2019</span>
+            <!-- Movie List -->
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6" th:each="movie : ${listMovie}">
+                    <div class="movie-card">
+                        <div class="movie-thumbnail"
+                             th:style="'background-image: url(' + ${movie.thumbnail} + ');'">
+                            <a th:href="@{'/movie/' + ${movie.id}}" class="play-button">
+                                <i class="fas fa-play"></i>
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <h5 class="movie-title" th:text="${movie.title}">Tên phim</h5>
+                            <p class="movie-description" th:text="${movie.description}">Mô tả phim</p>
+                            <div class="movie-meta">
+                    <span class="rating">
+                        <i class="fas fa-star"></i> 7.9 <!-- Có muốn lấy rating thực không? -->
+                    </span>
+                                <span>2024</span> <!-- Nếu bạn cần năm sản xuất, cần thêm trường `year` -->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Movie Card 2 -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="movie-card">
-                    <div class="movie-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
-                        <button class="play-button">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                    <div class="movie-info">
-                        <h5 class="movie-title">Inception</h5>
-                        <p class="movie-description">Một bộ phim khoa học viễn tưởng đầy trí tuệ về những giấc mơ trong giấc mơ.</p>
-                        <div class="movie-meta">
-                            <span class="rating">
-                                <i class="fas fa-star"></i> 8.8
-                            </span>
-                            <span>2010</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Movie Card 3 -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="movie-card">
-                    <div class="movie-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
-                        <button class="play-button">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                    <div class="movie-info">
-                        <h5 class="movie-title">The Dark Knight</h5>
-                        <p class="movie-description">Biệt danh Batman đối đầu với kẻ thù nguy hiểm nhất - Joker trong cuộc chiến bảo vệ Gotham.</p>
-                        <div class="movie-meta">
-                            <span class="rating">
-                                <i class="fas fa-star"></i> 9.0
-                            </span>
-                            <span>2008</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Movie Card 4 -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="movie-card">
-                    <div class="movie-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
-                        <button class="play-button">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                    <div class="movie-info">
-                        <h5 class="movie-title">Interstellar</h5>
-                        <p class="movie-description">Hành trình khám phá vũ trụ để tìm ngôi nhà mới cho nhân loại trong tương lai.</p>
-                        <div class="movie-meta">
-                            <span class="rating">
-                                <i class="fas fa-star"></i> 8.6
-                            </span>
-                            <span>2014</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Movie Card 5 -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="movie-card">
-                    <div class="movie-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
-                        <button class="play-button">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                    <div class="movie-info">
-                        <h5 class="movie-title">La La Land</h5>
-                        <p class="movie-description">Câu chuyện tình yêu lãng mạn giữa một diễn viên và nhạc sĩ tại thành phố Los Angeles.</p>
-                        <div class="movie-meta">
-                            <span class="rating">
-                                <i class="fas fa-star"></i> 8.0
-                            </span>
-                            <span>2016</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Movie Card 6 -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="movie-card">
-                    <div class="movie-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1512070679279-8988d32161be?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
-                        <button class="play-button">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                    <div class="movie-info">
-                        <h5 class="movie-title">The Matrix</h5>
-                        <p class="movie-description">Neo khám phá sự thật về thế giới thực và trở thành người được chọn để cứu nhân loại.</p>
-                        <div class="movie-meta">
-                            <span class="rating">
-                                <i class="fas fa-star"></i> 8.7
-                            </span>
-                            <span>1999</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Movie Card 7 -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="movie-card">
-                    <div class="movie-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
-                        <button class="play-button">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                    <div class="movie-info">
-                        <h5 class="movie-title">Titanic</h5>
-                        <p class="movie-description">Câu chuyện tình yêu bất tử giữa Jack và Rose trên con tàu huyền thoại Titanic.</p>
-                        <div class="movie-meta">
-                            <span class="rating">
-                                <i class="fas fa-star"></i> 7.9
-                            </span>
-                            <span>1997</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Movie Card 8 -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="movie-card">
-                    <div class="movie-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
-                        <button class="play-button">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                    <div class="movie-info">
-                        <h5 class="movie-title">Forrest Gump</h5>
-                        <p class="movie-description">Cuộc đời phi thường của Forrest Gump - một người đàn ông đơn giản nhưng có trái tim nhân hậu.</p>
-                        <div class="movie-meta">
-                            <span class="rating">
-                                <i class="fas fa-star"></i> 8.8
-                            </span>
-                            <span>1994</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Load More Button -->
-        <div class="text-center mt-5">
-            <button class="btn btn-primary btn-lg">
-                <i class="fas fa-plus me-2"></i>Xem thêm phim
-            </button>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <h4><i class="fas fa-star me-2"></i>Star Movies</h4>
-                <p>Nền tảng xem phim trực tuyến hàng đầu Việt Nam</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-                <p class="mt-3">&copy; 2024 Star Movies. Tất cả quyền được bảo lưu.</p>
-            </div>
-        </div>
-    </footer>
+    <div th:replace="fragments/footer :: footer"></div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JS -->
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+    <!-- Styles -->
+    <div th:replace="fragments/styles :: styles"></div>
 
-        // Add active class to navigation on scroll
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 60) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Play button functionality
-        document.querySelectorAll('.play-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const movieCard = this.closest('.movie-card');
-                const movieTitle = movieCard.querySelector('.movie-title').textContent;
-                alert(`Đang phát: ${movieTitle}`);
-            });
-        });
-    </script>
+    <!-- Scripts -->
+    <div th:replace="fragments/scripts :: scripts"></div>
 </body>
+
 </html>
