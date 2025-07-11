@@ -1,0 +1,39 @@
+<nav class="col-md-2 d-none d-md-block admin-sidebar" th:fragment="adminSidebar">
+    <style>
+        .admin-sidebar {
+            min-height: 100vh;
+            background: #1a1a2e;
+            color: #fff;
+            padding-top: 2rem;
+        }
+        .admin-sidebar .nav-link {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .admin-sidebar .nav-link.active, .admin-sidebar .nav-link:hover {
+            background: #0f3460;
+            color: #e94560;
+            border-radius: 8px;
+        }
+    </style>
+    <div class="position-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" th:classappend="${activePage == 'dashboard'} ? 'active'" th:href="@{/admin/dash-board}">
+                    <i class="fas fa-tachometer-alt me-2"></i>Dash Board
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:classappend="${activePage == 'user'} ? 'active'" th:href="@{/admin/users}">
+                    <i class="fas fa-users me-2"></i>Quản lý User
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:classappend="${activePage == 'movie'} ? 'active'" th:href="@{/admin/movies}">
+                    <i class="fas fa-film me-2"></i>Quản lý Movie
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav> 
