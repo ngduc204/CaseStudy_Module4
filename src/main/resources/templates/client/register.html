@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Đăng ký tài khoản</title>
+    <meta charset="UTF-8">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #F0F0F0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        h2 {
+            color: #E50914;
+            margin-bottom: 25px;
+            font-size: 2.2em;
+            text-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+        }
+        form {
+            background-color: #0f0f0f;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border: 1px solid #333333;
+            box-sizing: border-box;
+        }
+        .mb-3 {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-label {
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            color: #F0F0F0;
+            font-weight: bold;
+        }
+        .form-control,
+        input[type="email"],
+        input[type="password"],
+        input[type="text"],
+        input[type="file"],
+        select.form-select {
+            padding: 12px 15px;
+            border: 1px solid #555555;
+            border-radius: 5px;
+            background-color: #2a2a2a;
+            color: #F0F0F0;
+            font-size: 1em;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .form-control:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="text"]:focus,
+        input[type="file"]:focus,
+        select.form-select:focus {
+            border-color: #E50914;
+            box-shadow: 0 0 8px rgba(229, 9, 20, 0.6);
+        }
+        input::placeholder {
+            color: #aaaaaa;
+            opacity: 0.8;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+        .btn-success {
+            background-color: #E50914;
+            color: white;
+            margin-top: 15px;
+        }
+        .btn-success:hover {
+            background-color: #FF0000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+        }
+        .btn-secondary {
+            background-color: #555555;
+            color: white;
+            margin-left: 10px;
+        }
+        .btn-secondary:hover {
+            background-color: #777777;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        #avatarPreviewNew {
+            margin-top: 15px;
+            align-self: center;
+        }
+        .error-message {
+            color: #FF4444;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1em;
+            background-color: rgba(255, 68, 68, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #FF4444;
+        }
+        .success-message {
+            color: #00CC00;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1em;
+            background-color: rgba(0, 204, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #00CC00;
+        }
+    </style>
+</head>
+
+<body>
+<h2>Đăng ký tài khoản mới</h2>
+
+<div th:if="${errorMessage}" class="error-message">
+    <p th:text="${errorMessage}"></p>
+</div>
+<div th:if="${successMessage}" class="success-message">
+    <p th:text="${successMessage}"></p>
+</div>
+
+<form th:action="@{/register}" th:object="${user}" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" th:field="*{email}" placeholder="Nhập địa chỉ email" required/>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Mật khẩu</label>
+        <input type="password" class="form-control" th:field="*{password}" placeholder="Nhập mật khẩu" required/>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Xác nhận mật khẩu</label>
+        <input type="password" class="form-control" name="confirmPassword" placeholder="Nhập lại mật khẩu" required/>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Họ tên</label>
+        <input type="text" class="form-control" th:field="*{fullName}" placeholder="Nhập họ và tên đầy đủ" required/>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Địa chỉ</label>
+        <input type="text" class="form-control" th:field="*{address}" placeholder="Nhập địa chỉ của bạn"/>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Điện thoại</label>
+        <input type="text" class="form-control" th:field="*{phone}" placeholder="Nhập số điện thoại"/>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Avatar</label>
+        <input type="file" class="form-control" id="avatarFile" name="avatarFile" accept=".png, .jpg, .jpeg"/>
+    </div>
+    <div class="mb-3">
+        <img id="avatarPreviewNew" style="display: none; max-width: 150px; border: 5px solid #ccc; border-radius: 25px" alt="avatar preview">
+    </div>
+
+    <input type="hidden" name="roleId" value="2"/>
+
+    <button type="submit" class="btn btn-success">Đăng ký</button>
+    <a th:href="@{/login}" class="btn btn-secondary">Quay lại đăng nhập</a>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(() => {
+        const avatarFile = $("#avatarFile");
+
+        avatarFile.change((e) => {
+            // Kiểm tra xem có file nào được chọn không
+            if (e.target.files && e.target.files[0]) {
+                const imgURL = URL.createObjectURL(e.target.files[0]);
+                $("#avatarPreviewNew").attr("src", imgURL).show();
+                // Nếu có avatar cũ từ ${user.avatarPath}, có thể ẩn nó đi
+                $("#avatarPreview").hide();
+            } else {
+                // Nếu không có file nào được chọn, ẩn preview mới
+                $("#avatarPreviewNew").hide().attr("src", "");
+                // Và hiển thị lại avatar cũ nếu có
+                // $("#avatarPreview").show();
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

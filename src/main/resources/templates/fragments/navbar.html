@@ -8,12 +8,35 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
+
+                <li class="nav-item" th:if="${loggedInUserRoleId != null and loggedInUserRoleId == 1}">
+                    <a class="nav-link" th:href="@{/admin/movies}"> <i class="fas fa-cog me-2"></i>Quản lý
+                    </a>
+                </li>
+                <li class="nav-item" th:if="${loggedInUsername}">
+                    <span class="nav-link">
+                        <img th:if="${loggedInUserAvatar}"
+                             th:src="${loggedInUserAvatar}"
+                             alt="Avatar"
+                             style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; margin-right: 8px;">
+                        <i th:unless="${loggedInUserAvatar}" class="fas fa-user-circle me-2"></i>
+                        Chào mừng, <span th:text="${loggedInUsername}" style="font-weight: bold; font-size: 1.1em;"></span>!
+                    </span>
+                </li>
+                <li class="nav-item" th:if="${loggedInUsername}">
+                    <form th:action="@{/logout}" method="post" style="display:inline;">
+                        <button type="submit" class="nav-link btn btn-link text-white">
+                            <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                        </button>
+                    </form>
+                </li>
+
+                <li class="nav-item" th:unless="${loggedInUsername}">
                     <a class="nav-link" th:href="@{/login}">
                         <i class="fas fa-user me-2"></i>Đăng nhập
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:unless="${loggedInUsername}">
                     <a class="nav-link" th:href="@{/register}">
                         <i class="fas fa-user-plus me-2"></i>Đăng ký
                     </a>

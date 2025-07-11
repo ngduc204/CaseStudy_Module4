@@ -35,6 +35,7 @@ public class User {
     private String avatar;
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "role_id")
     private Role role;
 
