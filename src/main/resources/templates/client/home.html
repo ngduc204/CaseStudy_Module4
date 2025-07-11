@@ -23,15 +23,14 @@
 
     <!-- Movies Section -->
     <section class="container" id="movies">
-        <h2 class="section-title">Danh sách phim</h2>
+        <h2 class="section-title text-center mb-5">Danh sách phim</h2>
 
         <div class="row g-4">
             <!-- Movie List -->
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-6" th:each="movie : ${listMovie}">
                     <div class="movie-card">
-                        <div class="movie-thumbnail"
-                             th:style="'background-image: url(' + ${movie.thumbnail} + ');'">
+                        <div class="movie-thumbnail" th:style="'background-image: url(' + ${movie.thumbnail} + ');'">
                             <a th:href="@{'/movie/' + ${movie.id}}" class="play-button">
                                 <i class="fas fa-play"></i>
                             </a>
@@ -40,10 +39,10 @@
                             <h5 class="movie-title" th:text="${movie.title}">Tên phim</h5>
                             <p class="movie-description" th:text="${movie.description}">Mô tả phim</p>
                             <div class="movie-meta">
-                    <span class="rating">
-                        <i class="fas fa-star"></i> 7.9 <!-- Có muốn lấy rating thực không? -->
-                    </span>
-                                <span>2024</span> <!-- Nếu bạn cần năm sản xuất, cần thêm trường `year` -->
+                                <span class="rating">
+                                    <i class="fas fa-star"></i> 7.9
+                                </span>
+                                <span>2024</span>
                             </div>
                         </div>
                     </div>

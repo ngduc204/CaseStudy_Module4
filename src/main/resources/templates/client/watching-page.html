@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${movieToWatch.title} + ' - Star Movies'">Xem phim - Star Movies</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <!-- Movie Player Section -->
+    <section class="movie-player-section">
+        <div class="container">
+            <div class="row">
+                <!-- Video Player -->
+                <div class="col-lg-8">
+                    <div class="video-container">
+                        <video th:src="${movieToWatch.movie}" controls class="movie-player">
+                            Trình duyệt của bạn không hỗ trợ video.
+                        </video>
+                    </div>
+                </div>
+
+                <!-- Movie Info -->
+                <div class="col-lg-4">
+                    <div class="movie-info-card">
+                        <div class="movie-poster">
+                            <img th:src="${movieToWatch.thumbnail}" th:alt="${movieToWatch.title}" class="poster-image">
+                        </div>
+                        <div class="movie-details">
+                            <h2 class="movie-title" th:text="${movieToWatch.title}">Tên phim</h2>
+                            <p class="movie-description" th:text="${movieToWatch.description}">Mô tả phim</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div th:replace="fragments/footer :: footer"></div>
+
+    <!-- Styles -->
+    <div th:replace="fragments/styles :: styles"></div>
+
+    <!-- Scripts -->
+    <div th:replace="fragments/scripts :: scripts"></div>
+</body>
+
+</html>

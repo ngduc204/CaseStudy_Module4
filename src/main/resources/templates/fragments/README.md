@@ -32,15 +32,6 @@ Thư mục này chứa các fragment Thymeleaf có thể tái sử dụng cho �
 - **Mục đích**: Layout template chung
 - **Sử dụng**: `th:replace="fragments/layout :: layout"`
 
-### 7. `movie-card.html`
-- **Mục đích**: Component hiển thị thông tin phim
-- **Sử dụng**: `th:replace="fragments/movie-card :: movie-card(movie)"`
-- **Tham số**: `movie` object với các thuộc tính:
-  - `title`: Tên phim
-  - `description`: Mô tả phim
-  - `imageUrl`: URL hình ảnh
-  - `rating`: Điểm đánh giá
-  - `year`: Năm phát hành
 
 ## Cách sử dụng
 
@@ -62,11 +53,6 @@ Thư mục này chứa các fragment Thymeleaf có thể tái sử dụng cho �
     <div th:replace="fragments/scripts :: scripts"></div>
 </body>
 </html>
-```
-
-### Sử dụng movie card
-```html
-<div th:replace="fragments/movie-card :: movie-card(${movie})"></div>
 ```
 
 ### Sử dụng layout
